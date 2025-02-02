@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO DA VELHA 3D</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000;
+            color: white;
+        }
+
+        .menu-container {
+            width: 600px;
+            margin: 150px auto;
+            padding: 25px;
+            background: #d8e4f0c0;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        .avatar-selection {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .avatar-container {
+            width: 160px;
+            height: 210px;
+            border-radius: 20px;
+            background: #627b95ea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid transparent;
+            transition: 0.3s;
+        }
+
+        .avatar-container.selected {
+            border: 2px solid rgb(34, 129, 0);
+        }
+
+        .start-button {
+            background: #ecf776;
+            border: #212121;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .start-button:hover {
+            background: #bc00a9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <h1>JOGO DA VELHA 3D</h1>
+        <p>Escolha o seu avatar para começar:</p>
+        <div class="avatar-selection">
+            <div class="avatar-container" id="avatarX" data-player="X"></div>
+            <div class="avatar-container" id="avatarO" data-player="O"></div>
+        </div>
+        <button class="start-button" disabled>Iniciar Jogo</button>
+    </div>
+
+    <script src="avatarmenu.js"></script>
+
+    <div id="gameArea" style="display:none;">
+        <!-- Conteúdo do jogo vai aqui -->
+        <p>Bem-vindo ao Jogo da Velha 3D!</p>
+    </div>
+    
+</body>
+</html>
