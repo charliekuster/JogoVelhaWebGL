@@ -9,17 +9,18 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000000;
+            background-image: url('assets/img/a.jpg');
             color: white;
+
         }
 
         .menu-container {
             width: 600px;
             margin: 150px auto;
             padding: 25px;
-            background: #d8e4f0c0;
+            background: #0f37528a;
             border-radius: 30px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(8, 8, 8, 0.2);
         }
 
         h1 {
@@ -37,7 +38,7 @@
             width: 160px;
             height: 210px;
             border-radius: 20px;
-            background: #627b95ea;
+            background: #222b34;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,7 +47,7 @@
         }
 
         .avatar-container.selected {
-            border: 2px solid rgb(34, 129, 0);
+            border: 2px solid rgb(0, 129, 101);
         }
 
         .start-button {
@@ -73,15 +74,16 @@
             <div class="avatar-container" id="avatarX" data-player="X"></div>
             <div class="avatar-container" id="avatarO" data-player="O"></div>
         </div>
-        <button class="start-button" disabled>Iniciar Jogo</button>
+        <button class="start-button" id="startButton" disabled>Iniciar Jogo</button>
+
+        <script>
+          document.getElementById('startButton').addEventListener('click', function() {
+            window.location.href = 'index.html'; 
+          });
+        </script>
     </div>
 
     <script src="avatarmenu.js"></script>
-
-    <div id="gameArea" style="display:none;">
-        <!-- Conteúdo do jogo vai aqui -->
-        <p>Bem-vindo ao Jogo da Velha 3D!</p>
-    </div>
     
 </body>
 </html>

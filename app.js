@@ -33,42 +33,57 @@ function createScene() {
    camera2.rotation = new BABYLON.Vector3(1.0055503635002186, -0.863123026826512, 0);
 
    // LUZ
-   const pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(3, 5, 0), scene);
-//   const pointLight2 = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(2, 5, 0), scene);
-   pointLight.intensity = 1.0;
-//   pointLight2.intensity = 0.7;
+   const pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0, 6, 0), scene);
+   pointLight.intensity = 0.0;
    // Variável para armazenar o tempo
-   let time = 0;
+   let time1 = 0;
 
    engine.runRenderLoop(() => {
       // Atualiza o tempo a cada frame
-      time += 0.06; // Velocidade da variação (ajuste conforme necessário)
+      time1 += 0.06; // Velocidade da variação (ajuste conforme necessário)
 
       // Calcula cores baseadas em uma senoide
-      const r = (Math.sin(time) + 1) / 2; // Oscila entre 0 e 1
-      const g = (Math.sin(time + Math.PI / 3) + 1) / 2; // Defasagem para outra cor
-      const b = (Math.sin(time + 2 * Math.PI / 3) + 1) / 2; // Outra defasagem
+      const r = 0.5*(Math.sin(time1) + 1) / 2; // Oscila entre 0 e 1
+      const g = (Math.sin(time1 + Math.PI / 3) + 1) / 2; // Defasagem para outra cor
+      const b = (Math.sin(time1 + 2 * Math.PI / 3) + 1) / 2; // Outra defasagem
 
       // Aplica as cores na luz
-      pointLight.diffuse = new BABYLON.Color3(r, g, b);
+      pointLight.diffuse = new BABYLON.Color3(r+0.6, g+0.6, b+0.6);
       pointLight.specular = new BABYLON.Color3(1 - r, 1 - g, 1 - b); // Oposto da difusa para um efeito interessante
 
-//      pointLight2.diffuse = new BABYLON.Color3(-r, -g, -b);
-//      pointLight2.specular = new BABYLON.Color3(r, g, b); // Oposto da difusa para um efeito interessante
 
       // Renderiza a cena
       scene.render();
    });
-   //const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0.1, 2, 0), scene);
-   //light.intensity = 0.9;
+
+   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0.1, 2, 0), scene);
+   light.intensity = 1.0;
+   light.diffuse = new BABYLON.Color3(1, 1, 1);
+   light.specular = new BABYLON.Color3(0.5, 0.5, 0.5);
 
    // TEXTURA DAS CAIXAS QUE FICAM SOBRE O CHÃO
    const boxMaterial = new BABYLON.StandardMaterial('boxMaterial', scene);
-   boxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
+   let time = 0;
+
+   engine.runRenderLoop(() => {
+      // Atualiza o tempo a cada frame (ajuste a velocidade com o fator)
+      time += 0.03;
+
+      // Calcula os valores RGB baseados em uma senoide
+      const r = (Math.sin(time) + 1) / 2; // Oscila entre 0 e 1
+      const g = (Math.sin(time + Math.PI / 3) + 1) / 2; // Defasado para mudar suavemente
+      const b = (Math.sin(time + 2 * Math.PI / 3) + 1) / 2; // Outro desfasamento para variedade
+
+      // Aplica a nova cor ao material da caixa
+      boxMaterial.diffuseColor = new BABYLON.Color3(r, g, b);
+
+      // Renderiza a cena
+      scene.render();
+   });
    boxMaterial.wireframe = true;
 
    const groundMaterial = new BABYLON.StandardMaterial('groundMaterial', scene);
-   groundMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+   groundMaterial.diffuseColor = new BABYLON.Color3(0.1, 0.1, 0.1);
    groundMaterial.emissiveColor = new BABYLON.Vector3(0, 0, 0);
 
    // CEU MATERIAL
@@ -84,8 +99,8 @@ function createScene() {
 
    // CHAO
    const ground = BABYLON.Mesh.CreateBox('ground', 15, scene);
-   ground.position = new BABYLON.Vector3(0, -13.1, 0);
-   ground.scaling.y = 2;
+   ground.position = new BABYLON.Vector3(0, -5.6, 0);
+   ground.scaling.y = 1;
    ground.material = groundMaterial;
 
    // ARRAY DO GAME
@@ -136,12 +151,13 @@ function createScene() {
 
    function getX(mesh) {
       let x1 = BABYLON.Mesh.CreateBox('x', 3, scene);
-      x1.scaling.x = 0.1;
+      x1.scaling.x = 0.2;
       x1.rotation.y = 2.5;
 
       let x2 = BABYLON.Mesh.CreateBox('x', 3, scene);
-      x2.scaling.x = 0.1;
+      x2.scaling.x = 0.2;
       x2.rotation.y = -2.5;
+   
 
       x2.parent = mesh;
       x2.position.y = 1.5;
@@ -164,28 +180,35 @@ function createScene() {
       for (let i = 0; i < game.length; i++) {
          if (game[i].value && game[i + 3] && game[i].value === game[i + 3].value && game[i + 6] && game[i + 6].value === game[i + 3].value) {
             setPlacar(game[i].value);
-            possoJogar = false;
-            resetGame();
-            scene.activeCamera = camera2;
+            highlightWinner([game[i], game[i + 3], game[i + 6]]);
             return;
          } else if ((i === 0 || i === 3 || i === 6) && game[i + 1].value && game[i].value === game[i + 1].value && game[i + 2] && game[i + 2].value === game[i + 1].value) {
             setPlacar(game[i].value);
-            resetGame();
-            scene.activeCamera = camera2;
-            possoJogar = false;
+            highlightWinner([game[i], game[i + 1], game[i + 2]]);
             return;
          } else if (game[4].value && ((game[0].value === game[4].value && game[4].value === game[8].value) || (game[2].value === game[4].value && game[4].value === game[6].value))) {
             setPlacar(game[4].value);
-            possoJogar = false;
-            scene.activeCamera = camera2;
-            resetGame();
+            highlightWinner([game[0], game[4], game[8]]);
             return;
          } else {
             verifyVelha();
          }
       }
-   }
+   }   
 
+   function highlightWinner(winningPieces) {
+      winningPieces.forEach(piece => {
+          if (piece.parent) {
+              let winnerMaterial = new BABYLON.StandardMaterial('winnerMaterial', scene);
+              winnerMaterial.diffuseColor = piece.value === 'o' ? new BABYLON.Color3(1, 0, 0) : new BABYLON.Color3(0, 0, 1); // Amarelo para X, Azul para O
+              piece.parent.material = winnerMaterial;
+          }
+      });
+  
+      possoJogar = false;
+      scene.activeCamera = camera2;
+      resetGame();
+  }
    function setPlacar(value) {
       let ground = scene.getMeshByName('ground');
       groundMaterial.emissiveColor = new BABYLON.Vector3(0, 0, 0);
@@ -212,6 +235,8 @@ function createScene() {
          groundMaterial.emissiveColor = new BABYLON.Vector3(0, 0, 0);
          let ground = scene.getMeshByName('ground');
          ground.material.emissiveTexture = videoTextureVelha;
+         pointLight.intensity = 1.0;
+         light.intensity = 0.0;
          possoJogar = false;
          scene.activeCamera = camera2;
          resetGame();
