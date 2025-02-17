@@ -7,7 +7,7 @@ Computação Gráfica - Profª Ana Luisa
 ## Autores
 1. Guilherme de Souza Sabbado
 2. Laura Maria Cunha Lisbôa
-3. Lidiane Pereira Kuster
+3. Lidyane P. Küster
 4. Luiza Araujo de Oliveira Caram Saliba
    
 
