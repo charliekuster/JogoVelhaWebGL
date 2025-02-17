@@ -1,4 +1,4 @@
-*Jogo da Velha 3D*
+JOGO DA VELHA 3D
 
 Universidade Federal de São Paulo
 
@@ -8,7 +8,7 @@ Autores:
 1. Guilherme de Souza Sabbado
 2. Laura Maria Cunha Lisbôa
 3. Luiza Araujo de Oliveira Caram Saliba
-4. 
+4. Lidiane Pereira Kuster
 
 
 Este repositório é composto por todo o desenvolvimento do projeto final da unidade curricular de Computação Gráfica.
