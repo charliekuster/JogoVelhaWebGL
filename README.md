@@ -7,8 +7,9 @@ Computação Gráfica - Profª Ana Luisa
 ## Autores
 1. Guilherme de Souza Sabbado
 2. Laura Maria Cunha Lisbôa
-3. Luiza Araujo de Oliveira Caram Saliba
-4. Lidiane Pereira Kuster
+3. Lidiane Pereira Kuster
+4. Luiza Araujo de Oliveira Caram Saliba
+   
 
 
 Este repositório é composto por todo o desenvolvimento do projeto final da unidade curricular de Computação Gráfica.
