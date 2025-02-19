@@ -22,7 +22,7 @@ function createAvatar(containerId, type) {
     const headGeometry = new THREE.SphereGeometry(1, 32, 32);
     const headMaterial = new THREE.MeshPhongMaterial({ color: 0xffdd55 });
     const head = new THREE.Mesh(headGeometry, headMaterial);
-    head.position.y = 2;
+    head.position.y = 1.7;
     scene.add(head);
 
     // Criando o X ou O (para girar)
@@ -34,12 +34,12 @@ function createAvatar(containerId, type) {
         const line1 = new THREE.Mesh(xGeometry, xMaterial);
         line1.rotation.z = Math.PI / 4;
         line1.position.y = 2.0;
-        line1.position.z = 0.9;
+        line1.position.z = 0.0;
 
         const line2 = new THREE.Mesh(xGeometry, xMaterial);
         line2.rotation.z = -Math.PI / 4;
         line2.position.y = 2.0;
-        line2.position.z = 0.9;
+        line2.position.z = 0.0;
 
         rotatingSymbol = new THREE.Group();
         rotatingSymbol.add(line1);
@@ -49,7 +49,7 @@ function createAvatar(containerId, type) {
         const circleMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
         rotatingSymbol = new THREE.Mesh(circleGeometry, circleMaterial);
         rotatingSymbol.position.y = 2.0;
-        rotatingSymbol.position.z = 0.9;
+        rotatingSymbol.position.z = 0.0;
     }
 
     head.add(rotatingSymbol); // Adiciona o X ou O para girar sobre a cabeça
@@ -61,7 +61,7 @@ function createAvatar(containerId, type) {
 
     const bodyMaterial = new THREE.MeshPhongMaterial({ color: type === "X" ? 0x00ff00 : 0xff0000 });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-    body.position.y = 0;
+    body.position.y = -0.2;
     scene.add(body);
 
     // Criando os braços
@@ -70,13 +70,13 @@ function createAvatar(containerId, type) {
 
     const leftArm = new THREE.Mesh(armGeometry, armMaterial);
     leftArm.position.x = -1.2;
-    leftArm.position.y = 0.5;
+    leftArm.position.y = 0.3;
     leftArm.rotation.z = Math.PI / 4;
     scene.add(leftArm);
 
     const rightArm = new THREE.Mesh(armGeometry, armMaterial);
     rightArm.position.x = 1.2;
-    rightArm.position.y = 0.5;
+    rightArm.position.y = 0.3;
     rightArm.rotation.z = -Math.PI / 4;
     scene.add(rightArm);
 
