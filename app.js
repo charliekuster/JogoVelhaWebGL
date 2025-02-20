@@ -40,7 +40,6 @@ function createScene() {
 
 
    // LUZ
-   //const pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0, 6, 0), scene);
    const pointLight = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0, 25, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 4, 2, scene);
    pointLight.intensity = 0.0;
    const spotLight2 = new BABYLON.SpotLight(
@@ -206,7 +205,7 @@ function createScene() {
       return x1;
    }
 
-
+   // Seleciona o valor em que será colocado no tabuleiro
    function getParent(mesh) {
       let jogador = trocar ? BABYLON.Mesh.CreateTorus('o', 3, 0.8, 50, scene) : getX(mesh);
       jogador.parent = mesh;
@@ -396,7 +395,7 @@ function createScene() {
       }
    }
 
-   // Modifique a função resetGame para ter um delay maior e parar as animações
+   
    function resetGame() {
       setTimeout(() => {
          // Parar todas as animações antes do dispose
@@ -406,7 +405,7 @@ function createScene() {
          createScene();
          trocar = !trocar;
          possoJogar = true;
-      }, 4000); // Aumentado para 4 segundos para dar tempo de ver a animação
+      }, 4000); 
    }
 
    return scene;
